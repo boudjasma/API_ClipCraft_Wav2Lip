@@ -4,9 +4,9 @@ from gtts import gTTS
 from moviepy.editor import VideoFileClip, AudioFileClip
 import datetime
 
-api = Flask(__name__)
+app = Flask(__name__)
 
-@api.route('/generate-video', methods=['POST'])
+@app.route('/generate-video', methods=['POST'])
 def generate_video():
     title = request.form.get('title').replace(" ","-")
     text = request.form.get('text')
@@ -39,10 +39,10 @@ def generate_video():
     # Retournez l'URL de la vidéo générée
     return jsonify({'video_url': output_path})
 
-@api.route('/hello', methods=['GET'])
+@app.route('/hello', methods=['GET'])
 def hello():
     return 'Hello'
 
 if __name__ == '__main__':
-    api.run()
+    app.run()
 

@@ -19,7 +19,12 @@ Pour le cloud :
 - Dans le projet local, lancer la commande suivante : 
     gcloud init
 - Exécuter les commandes : 
-    docker build -t api-prime:v1 .
-    docker tag api-prime:v1 us-central1-docker.pkg.dev/driven-lore-383409/my-amazing-container/api-prime:v1 
+    docker build -t api-wav2lip:v1 .
+    docker tag api-wav2lip:v1 us-central1-docker.pkg.dev/driven-lore-383409/my-amazing-container/api-wav2lip:v1 
     gcloud auth configure-docker us-central1-docker.pkg.dev
     docker push us-central1-docker.pkg.dev/driven-lore-383409/my-amazing-container/api-prime:v1
+
+Création de l'image docker :
+    docker build -t api-clipcraft-wav2lip:v1.0 .
+Run de l'image :
+    docker run -p 5000:5000 -it api-clipcraft-wav2lip:v1
