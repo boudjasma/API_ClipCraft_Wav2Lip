@@ -3,13 +3,15 @@ FROM python:3.6-buster
 # Installer ffmpeg avec apt
 RUN apt-get update && apt-get install -y ffmpeg
 
-WORKDIR /app
+RUN mkdir /opt/clipcraftapi \
+        && python3 -m venv /opt/clipcraftapi/venv
 
-COPY . /app
+WORKDIR /opt/clipcraftapi
 
-RUN pip install --upgrade pip && \
-    pip install -r requirements.txt
+COPY . /opt/clipcraftapi
+
+RUN pip install -r requirements.txt
 
 EXPOSE 5000
 
-CMD [ "python", "./app.py" ]
+CMD [ "python", "/opt/clipcraftapi/app.py" ]
