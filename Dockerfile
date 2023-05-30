@@ -14,4 +14,4 @@ RUN pip install -r requirements.txt
 
 EXPOSE 5000
 
-CMD [ "python", "/opt/clipcraftapi/app.py" ]
+CMD [ "python", "./opt/clipcraftapi/app.py" ]
