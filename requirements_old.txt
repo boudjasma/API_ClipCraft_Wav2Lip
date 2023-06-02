@@ -10,3 +10,7 @@ numba==0.48
 gtts
 moviepy
 flask
+google-cloud-datastore
+google-cloud-storage
+gunicorn
+google-cloud-core

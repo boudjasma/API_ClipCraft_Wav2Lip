@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "clipcraft",
+  "private_key_id": "3c9643d555e25935b74ed6a79a76c8f8306e4092",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQDNIiS/9/7nkxpQ\nY3+kwIjq3/3U6n+ynGclTUTqT06e1K6D/WbkDrCGTfoTB7cmzSf0CXzwYkUePzD3\nGR9AyiunqhuVb3MYsF0KNCFU9hUJoCc+5fqEflM+cLEqjuFVx1IZ/8OTrvXP82cT\neOWEqn8DfszRW/BjiNT+y/+XUEoI3AYEwxbuE26gcfYSZnLSk6ZTLzeNnpQ5BA1r\ngo1pVccO5sBMjx7/kh398BM21jCIvOUcI6qlXPL0aIGLMYbjH6WACzx0q28/qnIs\n8S3KRsD82B4NpcpQSEW8eeW7eTuTOech/OXzpcLV7TRrOyWPQ4+nG+Cn3JmlIRXM\nXgI1rDMvAgMBAAECggEAIM64pPEzVfMbbsbzB7T5UONBE/frM3Q7NOaOQpEriFCI\nlriE562Hwvsep0OBIdYG8UtBLarx1fwSRzq/2ltbLwYQQk6gUE8ImlSrDg0LYU45\naKBceCtCAgcA9scCN/dYZKsYqvp8+uS5VA5uWtDv3m29sTAsmqasNhIHTzp6lL7e\nQ2JePLlAQ8urwPL8XaQTJSussDq4GJ0ocdKh1429OWjqldMnpnDIf2OlATynf47j\ngWfUo4uIGtOOeXN+PO8et4WVK1Btl4C1m1rJvENgdkGJIc1o/rxQTqEtQ970cAu0\nQVCLOoJAB+6BEicnDQUXrerU3ZkodtTuOaCgOeu9DQKBgQD2VhYYK5HYMQ5P+ebx\n8eKuCPJpxmcmYqwPvMX2U4Og/ty1ABfgAwBLihR1Ifw39Lta+TkFf9wzTL3D4lPF\nD11m+GCxMCV0RJZ9vgN0WrYUfEDL8oHmDhmTUJDTO1/erwj6owJps4fZcgwbuP8q\nllB+yso5B2XO+WQf/np0L3BeYwKBgQDVLkNxpeGvIGp2PwVjVXOcHr4oHNZJcxpU\nx2pNPzrStlB1Zx5kZt1LMDZRjUH/zW334/4AAbrWYosLG5+FLAfP8mdl1yZ/Q0SU\nji6BvFO0wR6L/qxK1fCicxqLrcddLzfXNcXAvwlewVMYaVkA15tzwMr5WecOFNAL\nzxCbv957xQKBgARSkmSuLwr6IWQp4HGSawXexlIw1xKHXLmR+G9QG9kxX7IVZFXb\n959btuwvQnvA4aDBCs0b50NHL3VGfW3RzTPHW/r/+0hFA9cFBI6AIP3PCFwLz1e4\nG57IJSJvwkjoDWJIhfxQ2CtqoufBoUigBp2S9WV2ycSN/8HH92Ieivw9AoGAN31y\nWsvGAhLbA2qGGYQtsq6h6skO0lGewgCiX/ccdaq1KMottA6+fYrQKMwvKMmtXUBA\nZnoMyy8daEfJbx217t/3ICAvyiKVYGHeIzEFTOCT9fbVnCkyGOcDOuaCJXRcAa3i\nirhvVPXXjlwlqb11nlzJuLw5E4ZBXUGJ3jDEVc0CgYABqcmQER3iqytozOzGRQ38\nJ4/qhnVfrueBahwI4a8cShgT+EZWBaCseiz/g5aaNBio8PBD/YrwmJT474tGO1rV\nV3qCvTPkKeevopU3uhmbVCzWP8/LzRUwdiWZk0qbPOriuByKvz+grlLVwoZylPc1\nYHr0hL45Gn3fkr99YOJLBw==\n-----END PRIVATE KEY-----\n",
+  "client_email": "clipcraft@clipcraft.iam.gserviceaccount.com",
+  "client_id": "116115526334438094438",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/clipcraft%40clipcraft.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
