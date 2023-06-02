@@ -40,3 +40,7 @@ typing_extensions==4.1.1
 urllib3==1.26.16
 Werkzeug==2.0.3
 zipp==3.6.0
+google-cloud-datastore
+google-cloud-storage
+gunicorn
+google-cloud-core
