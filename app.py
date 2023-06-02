@@ -19,7 +19,7 @@ def text_to_vid(title, text, avatar):
 
     # Wav2Lip 
     checkpoint_path = "checkpoints/wav2lip.pth"
-    input_face = f"images/{avatar}.png"  # Remplacez par le chemin de votre fichier PNG
+    input_face = f"images/{avatar}.png"
     input_audio = "speech.wav"
 
     os.system(f"python inference.py --checkpoint_path {checkpoint_path} --face {input_face} --audio {input_audio}")
@@ -49,8 +49,6 @@ def stockage_on_gs(video_path, title):
     frame_height = int(video.get(cv2.CAP_PROP_FRAME_HEIGHT))
     fps = video.get(cv2.CAP_PROP_FPS)
     frames = []
-
-    # Lire les frames de la vidéo et les stocker dans la liste
     while video.isOpened():
         ret, frame = video.read()
         if not ret:
@@ -68,15 +66,13 @@ def stockage_on_gs(video_path, title):
     blob.upload_from_filename(video_path)
 
     url = blob.public_url
-    print("Fichier vidéo stocké avec succès !")
-    print("Lien de téléchargement : {}".format(url))
+    print("Fichier vidéo stocké avec succès !") #noqa
+    print("Lien de téléchargement : {}".format(url)) #noqa
 
     # Remove from local
     os.remove(video_path)
 
     return url
-
-
 
 
 @app.route('/generate-video', methods=['POST'])
@@ -85,16 +81,17 @@ def generate_video():
     text = request.form.get('text')
     avatar = "avatar"+str(request.form.get('photo'))
 
-    print(title,text,avatar)
-    # video = text_to_vid(title,text, avatar)
-    # url = stockage_on_gs(video,title)
-    url="https://storage.googleapis.com/clipcraft-bucket1/Alexisc-Clo%C3%A9-p%C3%A9diatre-2023-06-03-011502-918333"
+    print(title,text,avatar) #noqa
+
+    video = text_to_vid(title,text, avatar)
+    url = stockage_on_gs(video,title)
+
 
     return jsonify({'video_url': format(url)})
 
-@app.route('/hello', methods=['GET'])
-def hello():
-    return 'Hello'
+@app.route('/ClipCraft', methods=['GET'])
+def get():
+    return 'Hello from ClipCraft Api !'
 
 if __name__ == '__main__':
     app.run()
