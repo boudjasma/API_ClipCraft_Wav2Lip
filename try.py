@@ -1,9 +1,11 @@
+import io
 import os
 from gtts import gTTS
 from moviepy.editor import VideoFileClip, AudioFileClip
 from google.cloud import storage
 import cv2
 import numpy as np
+import torch
 
 
 
@@ -73,9 +75,15 @@ def stockage_on_gs(video_path, title):
 
 
 
-video = text_to_vid('ma-video','Ceci est juste un test', 'avatar8')
-stockage_on_gs(video,'ma-video')
+# video = text_to_vid('ma-video','Ceci est juste un test', 'avatar8')
+# stockage_on_gs(video,'ma-video')
 
 
 
-
+def load_wav2lip_model_from_gcs(bucket_name, model_path):
+    storage_client = storage.Client.from_service_account_json("key.json")
+    bucket = storage_client.get_bucket(bucket_name)
+    blob = bucket.blob(model_path)
+    model_bytes = blob.download_as_bytes()
+    model = torch.load(io.BytesIO(model_bytes), map_location=torch.device('cpu'))
+    return model

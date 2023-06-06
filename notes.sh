@@ -47,3 +47,10 @@ Text à introduire :
 Bonjour, je suis Cloé. En tant que pédiatre, je crois fermement à l'importance d'une approche bienveillante et empathique pour chaque enfant et chaque famille.  
 Merci de me rejoindre aujourd'hui et n'hésitez pas à me poser des questions ou à partager vos préoccupations. Je suis là pour vous aider et soutenir la santé de vos enfants.
 
+
+
+Deploiement de l'application (django):
+docker build -t clipcraftapp:v1.1 .
+docker tag clipcraftapp:v1.1 europe-west1-docker.pkg.dev/driven-lore-383409/my-amazing-container/clipcraftapp:v1.1 
+gcloud auth configure-docker us-central1-docker.pkg.dev
+docker push us-central1-docker.pkg.dev/driven-lore-383409/my-amazing-container/api-prime:v1
