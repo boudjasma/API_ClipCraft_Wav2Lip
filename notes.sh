@@ -54,3 +54,35 @@ docker build -t clipcraftapp:v1.1 .
 docker tag clipcraftapp:v1.1 europe-west1-docker.pkg.dev/driven-lore-383409/my-amazing-container/clipcraftapp:v1.1 
 gcloud auth configure-docker us-central1-docker.pkg.dev
 docker push us-central1-docker.pkg.dev/driven-lore-383409/my-amazing-container/api-prime:v1
+
+
+
+Deployer l'app :
+gcloud auth login
+gcloud auth configure-docker europe-west1-docker.pkg.dev
+gcloud config set project clipcraft 
+docker tag clipcraftapp:v2.2 europe-west1-docker.pkg.dev/clipcraft/depot-clipcraft-app/clipcraftapp:v2.2
+docker push europe-west1-docker.pkg.dev/clipcraft/depot-clipcraft-app/clipcraftapp:v2.2
+
+Deployer l'api :
+gcloud auth login
+gcloud auth configure-docker europe-west1-docker.pkg.dev
+gcloud config set project clipcraft
+docker tag clipcraftap:v4 europe-west1-docker.pkg.dev/clipcraft/depot-clipcraft-api/clipcraftap:v4 
+docker push europe-west1-docker.pkg.dev/clipcraft/depot-clipcraft-api/clipcraftap:v4
+
+Pour supprimer tous les contenaires qui ne servent à rien :
+docker system prune
+
+
+docker run 864ed9e14f3f sh -c "python manage.py makemigrations && python manage.py migrate"
+docker run -i -t 864ed9e14f3f sh
+python manage.py createsuperuser
+Email address: clipcraftapp@gmail.com 
+Password:Clipcraft2023*
+Password (again):Clipcraft2023*
+Superuser created successfully.
+
+
+Last trying :
+gcloud components install kubectl

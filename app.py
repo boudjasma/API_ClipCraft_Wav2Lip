@@ -9,8 +9,6 @@ import numpy as np
 
 _BUCKET_NAME = 'clipcraft-bucket1'
 
-app = Flask(__name__)
-
 
 def text_to_vid(title, text, avatar):
     # Text to speech
@@ -74,25 +72,29 @@ def stockage_on_gs(video_path, title):
 
     return url
 
+def flask_app():
+    app = Flask(__name__)
 
-@app.route('/generate-video', methods=['POST'])
-def generate_video():
-    title = request.form.get('title').replace(" ","-").replace(".","-").replace(":","")
-    text = request.form.get('text')
-    avatar = "avatar"+str(request.form.get('photo'))
+    @app.route('/generate-video', methods=['POST'])
+    def generate_video():
+        title = request.form.get('title').replace(" ","-").replace(".","-").replace(":","")
+        text = request.form.get('text')
+        avatar = "avatar"+str(request.form.get('photo'))
 
-    print(title,text,avatar) #noqa
+        print(title,text,avatar) #noqa
 
-    video = text_to_vid(title,text, avatar)
-    url = stockage_on_gs(video,title)
+        video = text_to_vid(title,text, avatar)
+        url = stockage_on_gs(video,title)
 
+        print(url)
+        return jsonify({'video_url': url})
 
-    return jsonify({'video_url': format(url)})
-
-@app.route('/ClipCraft', methods=['GET'])
-def get():
-    return 'Hello from ClipCraft Api !'
+    @app.route('/', methods=['GET'])
+    def get():
+        return 'Hello from ClipCraft Api !'
+    
+    return app
 
 if __name__ == '__main__':
-    app.run()
-
+    app = flask_app()
+    app.run(debug=True, host = '0.0.0.0', port='5000')
