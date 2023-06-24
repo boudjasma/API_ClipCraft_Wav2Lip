@@ -6,14 +6,53 @@ import datetime
 from google.cloud import storage
 import cv2
 import numpy as np
+from google.cloud import texttospeech
+from google.oauth2 import service_account
 
 _BUCKET_NAME = 'clipcraft-bucket1'
+def auth_GCP(path_key): 
+    credentials_path = path_key
+    service_account.Credentials.from_service_account_file(credentials_path)
+
+def Text2wave(text, output_file, gender, path_key):
+    auth_GCP(path_key)
+    client = texttospeech.TextToSpeechClient()
+    if gender=="male":
+        voice= texttospeech.VoiceSelectionParams(
+        language_code="fr-FR",
+        name="fr-FR-Wavenet-D",
+        ssml_gender=texttospeech.SsmlVoiceGender.MALE,
+        )
+        
+    else:
+        voice = texttospeech.VoiceSelectionParams(
+        language_code="fr-FR",
+        name="fr-FR-Wavenet-C",
+        ssml_gender=texttospeech.SsmlVoiceGender.FEMALE,
+    )
+
+    synthesis_input = texttospeech.SynthesisInput(text=text)
+
+    audio_config = texttospeech.AudioConfig(
+        audio_encoding=texttospeech.AudioEncoding.LINEAR16
+    )
+
+    response = client.synthesize_speech(
+        request={
+            "input": synthesis_input,
+            "voice": voice,
+            "audio_config": audio_config,
+        }
+    )
+
+    with open(output_file, "wb") as out_file:
+        out_file.write(response.audio_content)
+
+    print(f'Audio content written to "{output_file}"') #noqa
 
 
-def text_to_vid(title, text, avatar):
-    # Text to speech
-    tts = gTTS(text, lang='fr')
-    tts.save("speech.wav")
+def text_to_vid(title, text, avatar, gender): 
+    Text2wave(text,"speech.wav", gender,"key.json")
 
     # Wav2Lip 
     checkpoint_path = "checkpoints/wav2lip.pth"
@@ -72,29 +111,28 @@ def stockage_on_gs(video_path, title):
 
     return url
 
-def flask_app():
-    app = Flask(__name__)
+app = Flask(__name__)
 
-    @app.route('/generate-video', methods=['POST'])
-    def generate_video():
-        title = request.form.get('title').replace(" ","-").replace(".","-").replace(":","")
-        text = request.form.get('text')
-        avatar = "avatar"+str(request.form.get('photo'))
+@app.route('/generate-video', methods=['POST'])
+def generate_video():
+    title = request.form.get('title').replace(" ","-").replace(".","-").replace(":","")
+    text = request.form.get('text')    
+    gender = request.form.get('photo')
+    avatar = "avatar"+str(gender)
+    print(title,text,avatar) #noqa
 
-        print(title,text,avatar) #noqa
+    gender="female"if gender in [1,2,5,6,8] else "male"
 
-        video = text_to_vid(title,text, avatar)
-        url = stockage_on_gs(video,title)
+    video = text_to_vid(title,text, avatar, gender)
+    url = stockage_on_gs(video,title)
 
-        print(url)
-        return jsonify({'video_url': url})
+    print(url)
+    return jsonify({'video_url': url})
 
-    @app.route('/', methods=['GET'])
-    def get():
-        return 'Hello from ClipCraft Api !'
-    
-    return app
+@app.route('/', methods=['GET'])
+def get():
+    return jsonify(message='Hello from ClipCraft Api !')
+
 
 if __name__ == '__main__':
-    app = flask_app()
     app.run(debug=True, host = '0.0.0.0', port='5000')

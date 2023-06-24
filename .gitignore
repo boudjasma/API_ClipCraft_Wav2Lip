@@ -1,7 +1,6 @@
 *.pkl
 *.jpg
 *.mp4
-*.pth
 *.pyc
 __pycache__
 *.h5
@@ -15,6 +14,7 @@ evaluation/test_filelists/lr*.txt
 *.gif
 *.webm
 *.mp3
+*.sh
 # Environments 
 .env 
 .venv 

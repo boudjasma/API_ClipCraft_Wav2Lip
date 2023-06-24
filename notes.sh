@@ -20,7 +20,7 @@ Pour le cloud :
     gcloud init
 - Exécuter les commandes : 
     docker build -t api-wav2lip:v1 .
-    docker tag api-wav2lip:v1 us-central1-docker.pkg.dev/driven-lore-383409/my-amazing-container/api-wav2lip:v1 
+    docker tag api-wav2lip:v1 us-central1-docker.pkg.dev/driven-lore-383409/my-amazing-container/clipcraftapi:v5.1 
     gcloud auth configure-docker us-central1-docker.pkg.dev
     docker push us-central1-docker.pkg.dev/driven-lore-383409/my-amazing-container/api-prime:v1
 
@@ -68,8 +68,8 @@ Deployer l'api :
 gcloud auth login
 gcloud auth configure-docker europe-west1-docker.pkg.dev
 gcloud config set project clipcraft
-docker tag clipcraftap:v4 europe-west1-docker.pkg.dev/clipcraft/depot-clipcraft-api/clipcraftap:v4 
-docker push europe-west1-docker.pkg.dev/clipcraft/depot-clipcraft-api/clipcraftap:v4
+docker tag clipcraftapi:v5.2 europe-west1-docker.pkg.dev/clipcraft/depot-clipcraft-api/clipcraftapi:v5.2
+docker push europe-west1-docker.pkg.dev/clipcraft/depot-clipcraft-api/clipcraftapi:v5.2
 
 Pour supprimer tous les contenaires qui ne servent à rien :
 docker system prune
@@ -86,3 +86,32 @@ Superuser created successfully.
 
 Last trying :
 gcloud components install kubectl
+
+
+
+# FROM python:3.6-buster
+
+# # Installer ffmpeg avec apt
+# RUN apt-get update && apt-get install -y ffmpeg
+
+# RUN python3 -m venv /opt/clipcraftapi/venv
+
+# RUN pip3 install --upgrade pip  
+
+# RUN apt-get clean &&  apt-get autoclean && apt-get autoremove
+
+
+# # copy project
+# WORKDIR /
+# ADD . /app
+# WORKDIR /app
+
+# RUN chmod +r checkpoints/wav2lip.pth
+# RUN chmod +r images/*
+# RUN chmod -R 777 temp/
+
+# RUN pip3 install -r requirements.txt
+
+# EXPOSE 5000
+
+# CMD [ "python3","-u", "app.py" ]
