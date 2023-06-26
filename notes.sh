@@ -68,8 +68,8 @@ Deployer l'api :
 gcloud auth login
 gcloud auth configure-docker europe-west1-docker.pkg.dev
 gcloud config set project clipcraft
-docker tag clipcraftapi:v5.2 europe-west1-docker.pkg.dev/clipcraft/depot-clipcraft-api/clipcraftapi:v5.2
-docker push europe-west1-docker.pkg.dev/clipcraft/depot-clipcraft-api/clipcraftapi:v5.2
+docker tag clipcraftapi:v5.3 europe-west1-docker.pkg.dev/clipcraft/depot-clipcraft-api/clipcraftapi:v5.3
+docker push europe-west1-docker.pkg.dev/clipcraft/depot-clipcraft-api/clipcraftapi:v5.3
 
 Pour supprimer tous les contenaires qui ne servent à rien :
 docker system prune

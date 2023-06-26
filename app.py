@@ -10,6 +10,7 @@ from google.cloud import texttospeech
 from google.oauth2 import service_account
 
 _BUCKET_NAME = 'clipcraft-bucket1'
+
 def auth_GCP(path_key): 
     credentials_path = path_key
     service_account.Credentials.from_service_account_file(credentials_path)
@@ -23,7 +24,6 @@ def Text2wave(text, output_file, gender, path_key):
         name="fr-FR-Wavenet-D",
         ssml_gender=texttospeech.SsmlVoiceGender.MALE,
         )
-        
     else:
         voice = texttospeech.VoiceSelectionParams(
         language_code="fr-FR",
@@ -121,9 +121,9 @@ def generate_video():
     avatar = "avatar"+str(gender)
     print(title,text,avatar) #noqa
 
-    gender="female"if gender in [1,2,5,6,8] else "male"
-
-    video = text_to_vid(title,text, avatar, gender)
+    gender_voice="female"if int(gender) in [1,2,5,6,8] else "male"
+    print(gender_voice)
+    video = text_to_vid(title,text, avatar, gender_voice)
     url = stockage_on_gs(video,title)
 
     print(url)
