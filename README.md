@@ -16,7 +16,7 @@ Voici les commandes à exécuter afin d'assurer le bon fonctionnement :
    
     sudo apt install python3.6-venv
     
-    python -m venv vapi 
+    python3.6 -m venv vapi 
     
     source vapi/bin/activate 
     
