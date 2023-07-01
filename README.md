@@ -28,4 +28,5 @@ Voici les commandes à exécuter afin d'assurer le bon fonctionnement :
     
 
 Pour run l'API il suffit d'exécuter la commande : 
+
     python api.py
