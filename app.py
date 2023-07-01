@@ -1,15 +1,25 @@
 from flask import Flask, request, jsonify
 import os
-from gtts import gTTS
 from moviepy.editor import VideoFileClip, AudioFileClip
-import datetime
 from google.cloud import storage
 import cv2
 import numpy as np
 from google.cloud import texttospeech
 from google.oauth2 import service_account
 
-_BUCKET_NAME = 'clipcraft-bucket1'
+def download_model_from_gcs():
+    BUCKET_NAME = 'clipcraft-aiplatform'
+    SOURCE_FOLDER = 'Wav2Lip'
+    DESTINATION_FOLDER = '.'
+
+    client = storage.Client.from_service_account_json("key.json")
+    bucket = client.get_bucket(BUCKET_NAME)
+    blobs = bucket.list_blobs(prefix=SOURCE_FOLDER)
+
+    for blob in blobs:
+        destination_path = os.path.join(DESTINATION_FOLDER, blob.name[len(SOURCE_FOLDER) + 1:])
+        os.makedirs(os.path.dirname(destination_path), exist_ok=True)
+        blob.download_to_filename(destination_path)
 
 def auth_GCP(path_key): 
     credentials_path = path_key
@@ -53,7 +63,7 @@ def Text2wave(text, output_file, gender, path_key):
 
 def text_to_vid(title, text, avatar, gender): 
     Text2wave(text,"speech.wav", gender,"key.json")
-
+    
     # Wav2Lip 
     checkpoint_path = "checkpoints/wav2lip.pth"
     input_face = f"images/{avatar}.png"
@@ -133,6 +143,7 @@ def generate_video():
 def get():
     return jsonify(message='Hello from ClipCraft Api !')
 
+download_model_from_gcs()
 
 if __name__ == '__main__':
     app.run(debug=True, host = '0.0.0.0', port='5000')
